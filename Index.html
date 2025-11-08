@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St Dora Beauty Hub</title>
+    <!-- Google Fonts for beautiful typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Enhanced Professional CSS - More mature with subtle gradients, refined typography, and elegant transitions */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f9f9f9, #e0e0e0); /* Subtle gradient for depth */
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(to right, #d4af37, #b08d2e); /* Gold gradient for luxury */
+            padding: 50px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .logo {
+            width: 200px; /* Adjust size as needed */
+            height: auto;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4em;
+            margin: 0;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Deeper shadow for elegance */
+        }
+        nav {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: #d4af37;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 700;
+            font-size: 1.2em;
+            transition: color 0.3s, transform 0.2s;
+        }
+        nav a:hover {
+            color: #b08d2e;
+            transform: translateY(-2px);
+        }
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h2 {
+            font-size: 2.5em;
+            color: #d4af37;
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .button {
+            background: linear-gradient(to right, #d4af37, #b08d2e);
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .button:hover {
+            background: linear-gradient(to right, #b08d2e, #d4af37);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        #gallery, #makeup-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            justify-items: center;
+        }
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.15);
+        }
+        #contact, #makeup-form-section {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 50px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        input, textarea {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        footer {
+            background: linear-gradient(to right, #d4af37, #b08d2e);
+            color: #fff;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+        /* Modal for full image view */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            padding-top: 60px;
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #fff;
+            font-size: 50px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .close:hover,
+        .close:focus {
+            color: #ddd;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3em;
+            }
+            nav a {
+                display: block;
+                margin: 15px 0;
+            }
+            .modal-content {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/05/attachment_69228474-e1558038312845.jpeg?auto=format&q=60&fit=max&w=930" alt="Hair and Nails Stylist Logo" class="logo">
+        <h1>St Dora Beauty Hub</h1>
+        <p>Elevating Your Beauty with Timeless Elegance and Sophistication</p>
+    </header>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Hair Gallery</a>
+        <a href="#makeup">Makeup</a>
+        <a href="#contact">Contact & Book</a>
+    </nav>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>St Dora Beauty Hub is a premier salon specializing in sophisticated hair and makeup services. Our expert stylist delivers personalized transformations that exude confidence and grace in an upscale, serene environment.</p>
+    </section>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        <p>We provide an array of premium services including hair cuts, coloring, styling, treatments, and professional makeup applications. Each experience is customized to enhance your natural allure.</p>
+        <div style="text-align: center;">
+            <a href="#contact" class="button">Book Now</a>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Our Signature Hair Styles</h2>
+        <p>Discover our exquisite hair transformations. Click any image to enlarge and envision your next look.</p>
+        <div id="gallery-grid">
+            <!-- Updated with Nigerian hairstyles -->
+            <div class="gallery-item" onclick="openModal('https://i.ytimg.com/vi/QJFFkGmQ3NA/sddefault.jpg')">
+                <img src="https://i.ytimg.com/vi/QJFFkGmQ3NA/sddefault.jpg" alt="Nigerian Braids">
+            </div>
+            <div class="gallery-item" onclick="openModal('https://i.ytimg.com/vi/6r1zxiICSnA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB_sunnp0_ty1wYHGTpYtcGtaGo3w')">
+                <img src="https://i.ytimg.com/vi/6r1zxiICSnA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB_sunnp0_ty1wYHGTpYtcGtaGo3w" alt="Nigerian Natural Hairstyles">
+            </div>
+            <div class="gallery-item" onclick="openModal('https://i.pinimg.com/736x/b3/7d/4d/b37d4d0e9e5abee3a415b740da56d2ba.jpg')">
+                <img src="https://i.pinimg.com/736x/b3/7d/4d/b37d4d0e9e5abee3a415b740da56d2ba.jpg" alt="Nigerian Shuku Hairstyles">
+            </div>
+            <div class="gallery-item" onclick="openModal('https://i.ytimg.com/vi/tzAxlrVHA5U/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAoRlcNVvTXWIszRbiaYR-ESgq4fg')">
+                <img src="https://i.ytimg.com/vi/tzAxlrVHA5U/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAoRlcNVvTXWIszRbiaYR-ESgq4fg" alt="Gorgeous Nigerian Hairstyles">
+            </div>
+            <div class="gallery-item" onclick="openModal('https://cimages.timbu.com/guides/2020/02/senegalese2_740x.jpeg')">
+                <img src="https://cimages.timbu.com/guides/2020/02/senegalese2_740x.jpeg" alt="Stunning Nigerian Hairstyles">
+            </div>
+            <div class="gallery-item" onclick="openModal('https://cdn.guardian.ng/wp-content/uploads/2019/08/cornrows-o-e1567009983155.jpeg')">
+                <img src="https://cdn.guardian.ng/wp-content/uploads/2019/08/cornrows-o-e1567009983155.jpeg" alt="Nigerian Cornrows">
+            </div>
+        </div>
+    </section>
+
+    <section id="makeup">
+        <h2>Our Exquisite Makeup Styles</h2>
+        <p>Indulge in our professional makeup artistry. Explore these looks and submit your details below to book a personalized session.</p>
+        <div id="makeup-gallery">
+            <!-- Updated with Nigerian makeup styles -->
+            <div class="gallery-item" onclick="openModal('https://i.ytimg.com/vi/4MGIP1KcUMc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB9_m-FIVl-m1UVrXYTiQW7QxnRog')">
+                <img src="https://i.ytimg.com/vi/4MGIP1KcUMc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB9_m-FIVl-m1UVrXYTiQW7QxnRog" alt="Nigerian Bridal Makeup">
+            </div>
+            <div class="gallery-item" onclick="openModal('https://i.ytimg.com/vi/RxnqGsH7Mzo/maxresdefault.jpg')">
+                <img src="https://i.ytimg.com/vi/RxnqGsH7Mzo/maxresdefault.jpg" alt="Igbo Bride Makeup">
+            </div>
+            <div class="gallery-item" onclick="openModal('https://www.stylerave.com/wp-content/uploads/2019/07/IMG_5856.jpg')">
+                <img src="https://www.stylerave.com/wp-content/uploads/2019/07/IMG_5856.jpg" alt="Traditional Nigerian Bridal Makeup">
+            </div>
+            <div class="gallery-item" onclick="openModal('https://i.ytimg.com/vi/KP5_LpTUqSE/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAGLYajyibwhlSGxsjly4ggEOl6Hg')">
+                <img src="https://i.ytimg.com/vi/KP5_LpTUqSE/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAGLYajyibwhlSGxsjly4ggEOl6Hg" alt="Soft Nigerian Bridal Makeup">
+            </div>
+            <div class="gallery-item" onclick="openModal('https://i.ytimg.com/vi/ssnBow9LKeY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDOvIzwwL3whCFukAIH4UslKYYzfg')">
+                <img src="https://i.ytimg.com/vi/ssnBow9LKeY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDOvIzwwL3whCFukAIH4UslKYYzfg" alt="Dark Skin Bridal Makeup">
+            </div>
+            <div class="gallery-item" onclick="openModal('https://loveweddingsng.com/wp-content/uploads/2018/10/Nigerian-Bridal-Makeup-Faces-by-Labisi-Her-Bloom-LoveWeddingsNG-3.jpg')">
+                <img src="https://loveweddingsng.com/wp-content/uploads/2018/10/Nigerian-Bridal-Makeup-Faces-by-Labisi-Her-Bloom-LoveWeddingsNG-3.jpg" alt="Nigerian Woman Makeup">
+            </div>
+        </div>
+        <!-- Makeup Booking Form -->
+        <div id="makeup-form-section" style="margin-top: 60px;">
+            <h2>Book Your Makeup Session</h2>
+            <p>Provide your details below, and we'll connect via WhatsApp to schedule.</p>
+            <form id="makeupForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <input type="tel" id="phone" placeholder="Your Phone Number" required>
+                <textarea id="message" placeholder="Preferred Makeup Style or Additional Info" rows="4" required></textarea>
+                <button type="submit" class="button">Submit to WhatsApp</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact & Booking</h2>
+        <p>Reach out for any inquiries or to book your appointment. We're dedicated to your exceptional beauty journey.</p>
+        <p><strong>WhatsApp:</strong> +2348034241086</p>
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://wa.me/2348034241086?text=Hello%20St%20Dora%20Beauty%20Hub,%20I'd%20like%20to%20book%20an%20appointment." class="button" target="_blank">Book via WhatsApp</a>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 St Dora Beauty Hub. All rights reserved.
+    </footer>
+
+    <!-- Modal structure -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <script>
+        // JavaScript with mature patterns: Modular functions, event delegation, and error handling
+        (function() {
+            // Smooth scrolling
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Staggered fade-in for galleries
+            window.addEventListener('load', function() {
+                const fadeInElements = document.querySelectorAll('.gallery-item');
+                fadeInElements.forEach((item, index) => {
+                    item.style.opacity = 0;
+                    item.style.transition = 'opacity 1s ease-in-out';
+                    setTimeout(() => {
+                        item.style.opacity = 1;
+                    }, index * 250); // Enhanced stagger for beauty
+                });
+            });
+
+            // Modal functions
+            window.openModal = function(src) {
+                const modal = document.getElementById('myModal');
+                const modalImg = document.getElementById('img01');
+                modal.style.display = 'block';
+                modalImg.src = src;
+                modal.style.opacity = 1;
+            };
+
+            window.closeModal = function() {
+                const modal = document.getElementById('myModal');
+                modal.style.opacity = 0;
+                setTimeout(() => { modal.style.display = 'none'; }, 300);
+            };
+
+            // Close modal on outside click
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('myModal');
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Form submission to WhatsApp
+            const form = document.getElementById('makeupForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    try {
+                        const name = document.getElementById('name').value.trim();
+                        const email = document.getElementById('email').value.trim();
+                        const phone = document.getElementById('phone').value.trim();
+                        const message = document.getElementById('message').value.trim();
+
+                        if (name && email && phone && message) {
+                            const waMessage = `Hello St Dora Beauty Hub,%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AMessage: ${message}`;
+                            window.open(`https://wa.me/2348034241086?text=${waMessage}`, '_blank');
+                            form.reset(); // Clear form after submission
+                        } else {
+                            alert('Please fill in all fields.');
+                        }
+                    } catch (error) {
+                        console.error('Form submission error:', error);
+                        alert('An error occurred. Please try again.');
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+          </html>
